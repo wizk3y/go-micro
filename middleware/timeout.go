@@ -3,20 +3,26 @@ package middleware
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"net/http"
+	"runtime"
 	"sync"
 	"time"
 )
 
 // TimeoutMiddleware is a middleware handler that support CORS response header
 type TimeoutMiddleware struct {
-	timeout time.Duration
+	timeout   time.Duration
+	stackAll  bool
+	stackSize int
 }
 
 // NewTimeoutMiddleware returns a new *Middleware which writes to a given logger.
 func NewTimeoutMiddleware(timeout time.Duration) *TimeoutMiddleware {
 	return &TimeoutMiddleware{
-		timeout: timeout,
+		timeout:   timeout,
+		stackAll:  false,
+		stackSize: 1024 * 8,
 	}
 }
 
@@ -32,8 +38,11 @@ func (m *TimeoutMiddleware) ServeHTTP(rw http.ResponseWriter, r *http.Request, n
 	panicChan := make(chan interface{}, 1) // catch panic in go routine and throw to main process
 	go func() {
 		defer func() {
-			if p := recover(); p != nil {
-				panicChan <- p
+			if err := recover(); err != nil {
+				stack := make([]byte, m.stackSize)
+				stack = stack[:runtime.Stack(stack, m.stackAll)]
+
+				panicChan <- &timeoutInnerPanic{err: err, Stack: stack}
 			}
 		}()
 
@@ -103,4 +112,13 @@ func (tw *timeoutWriter) WriteHeader(code int) {
 func (tw *timeoutWriter) writeHeader(code int) {
 	tw.wroteHeader = true
 	tw.code = code
+}
+
+type timeoutInnerPanic struct {
+	err   interface{}
+	Stack []byte
+}
+
+func (p *timeoutInnerPanic) Error() string {
+	return fmt.Sprintf("%s", p.err)
 }
