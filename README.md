@@ -107,6 +107,12 @@ func (s *server) OnClose() {
 // pkg/handler/get-handler.go
 package handler
 
+import (
+	"net/http"
+
+	"github.com/wizk3y/go-micro/transhttp"
+)
+
 type GetHandler struct {
 }
 
