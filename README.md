@@ -41,10 +41,10 @@ import (
 func main() {
 	microApp, hs := micro.NewAPIApp("your-api-server-name")
 
-    appServer := app.NewServer()
+	appServer := app.NewServer()
 	microApp.AddServer(appServer)
 
-    err := microApp.RunAPI(hs)
+	err := microApp.RunAPI(hs)
 	if err != nil {
 		if err.Error() == http.ErrServerClosed.Error() {
 			logger.Info(http.ErrServerClosed.Error())
@@ -82,14 +82,14 @@ func NewServer() transhttp.WebServer {
 // InitRoutes -- Initialize our routes
 func (s *server) InitRoutes() transhttp.Routes {
 	return transhttp.Routes{
-        transhttp.Route{
+		transhttp.Route{
 			Name:     "Get something handler",
 			Method:   http.MethodGet,
 			BasePath: s.basePath,
 			Pattern:  "/path",
 			Handler: &handler.GetHandler{},
 		},
-    }
+	}
 }
 
 // InitMiddlewares -- Initialize our middlewares
@@ -118,13 +118,13 @@ type GetHandler struct {
 
 // ServeHTTP --
 func (h *GetHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-    // handling some logic
-    if err != nil {
+	// handling some logic
+	if err != nil {
 		transhttp.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-    transhttp.RespondJSON(w, http.StatusOK, map[string]interface{}{})
+	transhttp.RespondJSON(w, http.StatusOK, map[string]interface{}{})
 }
 ```
 
