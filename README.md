@@ -1,6 +1,6 @@
 # go-micro
 
-go-micro is a Go toolkit help you build an monolith application or a service in micro-services, also change from monolith to micro-service with less effort
+go-micro is a Go toolkit help you build an monolith application or a service in micro-services, also change from monolith to micro-service with less effort.
 
 ## Install
 ```shell
@@ -10,7 +10,7 @@ go get github.com/wizk3y/go-micro
 **Note:** go-micro uses [Go Modules](https://github.com/golang/go/wiki/Modules) to manage dependencies.
 
 ## Usage
-- Create file/directory with follow structure (as best practice, you can organize project by your own)
+- Create file/directory with follow structure (as best practice, you can organize project by your own).
 ```
 your-project/
 ├── go.mod
@@ -21,11 +21,11 @@ your-project/
     ├── app/
     │   └── webserver.go
     └── handler/
-        ├── get-handler.go
-        ├── post-handler.go
-        └── put-handler.go
+        ├── get_handler.go
+        ├── post_handler.go
+        └── put_handler.go
 ```
-- Using `NewAPIApp` to create API app base, `AddServer` to add your app server, and `RunAPI` as final step to start your API server
+- Using `NewAPIApp` to create API app base, `AddServer` to add your app server, and `RunAPI` as final step to start your API server.
 ```go
 // cmd/main.go
 package main
@@ -54,7 +54,7 @@ func main() {
 	}
 }
 ```
-- File contains an struct have `InitRoutes`, `InitMiddlewares`, `OnClose` as an implement of `transhttp.WebServer`
+- File contains an struct have `InitRoutes`, `InitMiddlewares`, `OnClose` as an implement of `transhttp.WebServer`.
 ```go
 // pkg/app/webserver.go
 package app
@@ -129,15 +129,15 @@ func (h *GetHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 ```
 
 ## Advance usage
-- [Organize project as micro-services (single repository - best practice)](https://github.com/wizk3y/go-micro-doc/tree/master/structure/single-repository)
-- [Organize project as micro-services (multiple repositories - best practice)](https://github.com/wizk3y/go-micro-doc/tree/master/structure/multiple-repositories)
+- [Organize project as micro-services (single repository - best practice)](https://github.com/wizk3y/go-micro-doc/tree/master/structure/single_repository.md)
+- [Organize project as micro-services (multiple repositories - best practice)](https://github.com/wizk3y/go-micro-doc/tree/master/structure/multiple_repositories.md)
 
 ## Features
-- [Configuration](https://github.com/wizk3y/go-micro-doc/tree/master/feature/configuration)
-- [HTTP Middleware](https://github.com/wizk3y/go-micro-doc/tree/master/feature/http-middleware)
-- [PostgreSQL connection](https://github.com/wizk3y/go-micro-doc/tree/master/feature/postgresql-connection)
-- [MySQL connection](https://github.com/wizk3y/go-micro-doc/tree/master/feature/mysql-connection)
-- [Redis connection](https://github.com/wizk3y/go-micro-doc/tree/master/feature/redis-connection)
+- [Configuration](https://github.com/wizk3y/go-micro-doc/tree/master/feature/configuration.md)
+- [HTTP Middleware](https://github.com/wizk3y/go-micro-doc/tree/master/feature/http_middleware.md)
+- [PostgreSQL connection](https://github.com/wizk3y/go-micro-doc/tree/master/feature/postgresql_connection.md)
+- [MySQL connection](https://github.com/wizk3y/go-micro-doc/tree/master/feature/mysql_connection.md)
+- [Redis connection](https://github.com/wizk3y/go-micro-doc/tree/master/feature/redis_connection.md)
 
 
 ## Contributing
