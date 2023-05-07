@@ -33,7 +33,7 @@ package main
 import (
 	"net/http"
 
-    "module-name/pkg/app"
+	"module-name/pkg/app"
 	"github.com/wizk3y/go-micro/logger"
 	"github.com/wizk3y/go-micro/micro"
 )
@@ -62,7 +62,7 @@ package app
 import (
 	"net/http"
 
-    "module-name/pkg/handler"
+	"module-name/pkg/handler"
 	"github.com/urfave/negroni"
 	"github.com/wizk3y/go-micro/transhttp"
 )
